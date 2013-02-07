@@ -147,7 +147,7 @@
 #define SDPOWER            -1
 #define SDSS               31
 
-#define SLAVE_CLOCK	   16
+#define SLAVE_CLOCK    16
 
 #endif
 
@@ -213,13 +213,13 @@
 #define Y_DIR_PIN          61
 #define Y_ENABLE_PIN       56
 #define Y_MIN_PIN          14
-#define Y_MAX_PIN          15
+#define Y_MAX_PIN          -1 //Es el 15
 
 #define Z_STEP_PIN         46
 #define Z_DIR_PIN          48
 #define Z_ENABLE_PIN       62
-#define Z_MIN_PIN          18
-#define Z_MAX_PIN          19
+#define Z_MIN_PIN          15 // es el 18
+#define Z_MAX_PIN          -1 // es el 19
 
 #define Z2_STEP_PIN        36
 #define Z2_DIR_PIN         34
@@ -258,7 +258,7 @@
 #endif
 #define HEATER_2_PIN       -1
 #define TEMP_0_PIN         13   // ANALOG NUMBERING
-#define TEMP_1_PIN         15   // ANALOG NUMBERING
+#define TEMP_1_PIN         -1   // 15 ANALOG NUMBERING
 #define TEMP_2_PIN         -1   // ANALOG NUMBERING
 #define HEATER_BED_PIN     8    // BED
 #define TEMP_BED_PIN       14   // ANALOG NUMBERING
@@ -363,7 +363,7 @@
 #define Z_STEP_PIN         44
 #define Z_DIR_PIN          46
 #define Z_ENABLE_PIN       42
-#define Z_MIN_PIN          18
+#define Z_MIN_PIN          15
 #define Z_MAX_PIN          -1    //19
 
 #define E0_STEP_PIN         32
@@ -437,13 +437,13 @@
 #define Y_DIR_PIN          61
 #define Y_ENABLE_PIN       56
 #define Y_MIN_PIN          14
-#define Y_MAX_PIN          15
+#define Y_MAX_PIN          -1 // 15
 
 #define Z_STEP_PIN         46
 #define Z_DIR_PIN          48
 #define Z_ENABLE_PIN       62
-#define Z_MIN_PIN          18
-#define Z_MAX_PIN          19
+#define Z_MIN_PIN          15 // 18
+#define Z_MAX_PIN          -1 // 19
 
 #define Z2_STEP_PIN        36
 #define Z2_DIR_PIN         34
@@ -482,7 +482,7 @@
 #endif
 #define HEATER_2_PIN       -1
 #define TEMP_0_PIN         13   // ANALOG NUMBERING
-#define TEMP_1_PIN         15   // ANALOG NUMBERING
+#define TEMP_1_PIN         -1   // 15 ANALOG NUMBERING
 #define TEMP_2_PIN         -1   // ANALOG NUMBERING
 #define HEATER_BED_PIN     8    // BED
 #define TEMP_BED_PIN       14   // ANALOG NUMBERING
@@ -587,7 +587,7 @@
 #define Z_STEP_PIN         44
 #define Z_DIR_PIN          46
 #define Z_ENABLE_PIN       42
-#define Z_MIN_PIN          18
+#define Z_MIN_PIN          15 //18
 #define Z_MAX_PIN          -1    //19
 
 #define E0_STEP_PIN         32

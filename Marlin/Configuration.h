@@ -67,15 +67,15 @@
 // Sanguinololu 1.2 and above = 62
 // Melzi 63
 
-#ifdef REPRAPPRO_SANGUINOLOLU
-#define MOTHERBOARD 62
-#endif
+//#ifdef REPRAPPRO_SANGUINOLOLU
+//#define MOTHERBOARD 62
+//#endif
 
 #ifdef REPRAPPRO_MELZI
-#define MOTHERBOARD 63
+#define MOTHERBOARD 33
 #endif
 
-//#define MOTHERBOARD 33 //Example define Ramp 1.3
+#define MOTHERBOARD 33 //Example define Ramp 1.3
 
 //===========================================================================
 //=============================Thermal Settings  ============================
@@ -103,18 +103,18 @@
 #define ABS_ZERO -273.15
 #define AD_RANGE 16383
 
-// RS 198-961
-#define E_BETA 3960.0
+// 100k Glass Bead NTC Thermistor with 1% Tolerance http://store.qu-bd.com/product.php?id_product=16
+#define E_BETA 3974.0
 #define E_RS SERIAL_R
 #define E_NTC 100000.0
 #define E_R_INF ( E_NTC*exp(-E_BETA/298.15) )
 
 
 #ifdef REPRAPPRO_MENDEL
-// RS 484-0149; EPCOS B57550G103J
-#define BED_BETA 3480.0
+// QT1206Z-104J
+#define BED_BETA 3852.86
 #define BED_RS SERIAL_R
-#define BED_NTC 10000.0
+#define BED_NTC 100000.0
 #define BED_R_INF ( BED_NTC*exp(-BED_BETA/298.15) )
 #endif
 
@@ -135,24 +135,24 @@
 
 
 // Actual temperature must be close to target for this long before M109 returns success
-#define TEMP_RESIDENCY_TIME 5  // (seconds)
-#define TEMP_HYSTERESIS 5       // (C°) range of +/- temperatures considered "close" to the target one
-#define TEMP_WINDOW     2       // (degC) Window around target to start the recidency timer x degC early.
+#define TEMP_RESIDENCY_TIME 10  // (seconds)
+#define TEMP_HYSTERESIS 3       // (C°) range of +/- temperatures considered "close" to the target one
+#define TEMP_WINDOW     1       // (degC) Window around target to start the recidency timer x degC early.
 
 // The minimal temperature defines the temperature below which the heater will not be enabled It is used
 // to check that the wiring to the thermistor is not broken. 
 // Otherwise this would lead to the heater being powered on all the time.
-#define HEATER_0_MINTEMP 1
+#define HEATER_0_MINTEMP 5
 #ifdef REPRAPPRO_MULTIMATERIALS
-#define HEATER_1_MINTEMP 1
-#define HEATER_2_MINTEMP 1
+#define HEATER_1_MINTEMP 5
+#define HEATER_2_MINTEMP 5
 #endif
-#define BED_MINTEMP 1
+#define BED_MINTEMP 5
 
 // When temperature exceeds max temp, your heater will be switched off.
 // This feature exists to protect your hotend from overheating accidentally, but *NOT* from thermistor short/failure!
 // You should use MINTEMP for thermistor short/failure protection.
-#define HEATER_0_MAXTEMP 399
+#define HEATER_0_MAXTEMP 260
 #ifdef REPRAPPRO_MULTIMATERIALS
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
@@ -163,7 +163,7 @@
 // PID settings:
 // Comment the following line to disable PID and enable bang-bang.
 #define PIDTEMP
-#define PID_MAX 255 // limits current to nozzle; 255=full current
+#define PID_MAX 240 // limits current to nozzle; 255=full current
 #define FULL_PID_BAND 150 // Full power is applied when pid_error[e] > FULL_PID_BAND
 #ifdef PIDTEMP
   //#define PID_DEBUG // Sends debug data to the serial port. 
@@ -183,7 +183,7 @@
 //this prevents dangerous Extruder moves, i.e. if the temperature is under the limit
 //can be software-disabled for whatever purposes by
 #define PREVENT_DANGEROUS_EXTRUDE
-#define EXTRUDE_MINTEMP 170
+#define EXTRUDE_MINTEMP 175
 #define EXTRUDE_MAXLENGTH (200) //prevent extrusion of very large distances.
 #else
 #define BOGUS_TEMPERATURE_FAILSAFE_OVERRIDE
@@ -197,9 +197,9 @@
 #define ENDSTOPPULLUPS // Comment this out (using // at the start of the line) to disable the endstop pullup resistors
 
 // The pullups are needed if you directly connect a mechanical endswitch between the signal and ground pins.
-const bool X_ENDSTOPS_INVERTING = false; // set to true to invert the logic of the endstops. 
-const bool Y_ENDSTOPS_INVERTING = false; // set to true to invert the logic of the endstops. 
-const bool Z_ENDSTOPS_INVERTING = false; // set to true to invert the logic of the endstops. 
+const bool X_ENDSTOPS_INVERTING = true; // set to true to invert the logic of the endstops. 
+const bool Y_ENDSTOPS_INVERTING = true; // set to true to invert the logic of the endstops. 
+const bool Z_ENDSTOPS_INVERTING = true; // set to true to invert the logic of the endstops. 
 
 // For Inverting Stepper Enable Pins (Active Low) use 0, Non Inverting (Active High) use 1
 #define X_ENABLE_ON 0
@@ -210,15 +210,15 @@ const bool Z_ENDSTOPS_INVERTING = false; // set to true to invert the logic of t
 // Disables axis when it's not being used.
 #define DISABLE_X false
 #define DISABLE_Y false
-#define DISABLE_Z true
+#define DISABLE_Z false
 #define DISABLE_E false // For all extruders
 
-#define INVERT_X_DIR true    // for Mendel set to false, for Orca set to true
+#define INVERT_X_DIR false    // for Mendel set to false, for Orca set to true
 #define INVERT_Y_DIR false    // for Mendel set to true, for Orca set to false
-#define INVERT_Z_DIR false     // for Mendel set to false, for Orca set to true
-#define INVERT_E0_DIR true   // for direct drive extruder v9 set to true, for geared extruder set to false
-#define INVERT_E1_DIR true    // for direct drive extruder v9 set to true, for geared extruder set to false
-#define INVERT_E2_DIR true   // for direct drive extruder v9 set to true, for geared extruder set to false
+#define INVERT_Z_DIR true     // for Mendel set to false, for Orca set to true
+#define INVERT_E0_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
+#define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
+#define INVERT_E2_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
 
 // ENDSTOP SETTINGS:
 // Sets direction of endstops when homing; 1=MAX, -1=MIN
@@ -239,8 +239,8 @@ const bool Z_ENDSTOPS_INVERTING = false; // set to true to invert the logic of t
 
 #ifdef REPRAPPRO_MENDEL
 
-#define AXES_MAX_LENGTHS {210, 210, 140}
-#define HOMING_FEEDRATE {10*60, 10*60, 1*60, 0}  // set the homing speeds (mm/min)
+#define AXES_MAX_LENGTHS {200, 200, 90}
+#define HOMING_FEEDRATE {25*60, 25*60, 2*60, 0}  // set the homing speeds (mm/min)
 #define FAST_HOME_FEEDRATE {50*60, 50*60, 3*60, 0}  // set the homing speeds (mm/min)
 #define DEFAULT_MAX_FEEDRATE  {500, 500, 3, 45}
 #define DEFAULT_MAX_FEEDRATE          {300, 300, 3, 45}    // (mm/sec)    
@@ -248,12 +248,12 @@ const bool Z_ENDSTOPS_INVERTING = false; // set to true to invert the logic of t
 
 #else
 
-#define AXES_MAX_LENGTHS {155, 150, 90}
-#define HOMING_FEEDRATE {10*60, 10*60, 1*60, 0}  // set the homing speeds (mm/min)
+#define AXES_MAX_LENGTHS {200, 200, 90}
+#define HOMING_FEEDRATE {25*60, 25*60, 2*60, 0}  // set the homing speeds (mm/min)
 #define FAST_HOME_FEEDRATE {80*60, 80*60, 3*60, 0}  // set the homing speeds (mm/min)
-#define DEFAULT_MAX_FEEDRATE  {500, 500, 5, 45}    // (mm/sec)
-#define DEFAULT_MAX_FEEDRATE          {500, 500, 5, 45}    // (mm/sec)    
-#define DEFAULT_MAX_ACCELERATION      {1000,1000,50,1000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values
+#define DEFAULT_MAX_FEEDRATE  {400, 400, 2, 45}    // (mm/sec)
+#define DEFAULT_MAX_FEEDRATE          {400, 400, 2, 45}    // (mm/sec)    
+#define DEFAULT_MAX_ACCELERATION      {5000,5000,50,5000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values
 
 #endif
 
@@ -262,7 +262,7 @@ const bool Z_ENDSTOPS_INVERTING = false; // set to true to invert the logic of t
 // X, Y, Z, E steps per mm
 
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {91.4286, 91.4286, 4000, 875} // belt T2.5, pulley 14 teeth
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {71.1111, 71.1111, 4000, 875} // belt T2.5, pulley 18 teeth
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {80.264, 80.264, 2560,748.772} // belt T2.5, pulley 18 teeth
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {64, 64, 4000, 875}           // belt T2.5, pulley 20 teeth
 
 // Defaults changed by the G10 command
@@ -290,18 +290,18 @@ const bool Z_ENDSTOPS_INVERTING = false; // set to true to invert the logic of t
 #endif
 
 #define STANDBY_TEMP 140
-#define PLA_TEMP 205
-#define ABS_TEMP 250
+#define PLA_TEMP 210
+#define ABS_TEMP 240
 #define DEFAULT_TEMP PLA_TEMP
 
 
 #define DEFAULT_ACCELERATION          1000    // X, Y, Z and E max acceleration in mm/s^2 for printing moves 
-#define DEFAULT_RETRACT_ACCELERATION  1000   // X, Y, Z and E max acceleration in mm/s^2 for r retracts
+#define DEFAULT_RETRACT_ACCELERATION  2000   // X, Y, Z and E max acceleration in mm/s^2 for r retracts
 
 // 
-#define DEFAULT_XYJERK                15.0    // (mm/sec)
+#define DEFAULT_XYJERK                20.0    // (mm/sec)
 #define DEFAULT_ZJERK                 0.4     // (mm/sec)
-#define DEFAULT_EJERK                 15.0    // (mm/sec)
+#define DEFAULT_EJERK                 5.0    // (mm/sec)
 
 //===========================================================================
 //=============================Additional Features===========================
@@ -329,19 +329,19 @@ const bool Z_ENDSTOPS_INVERTING = false; // set to true to invert the logic of t
 
 //#define ULTIPANEL
 #ifdef ULTIPANEL
-  //#define NEWPANEL  //enable this if you have a click-encoder panel
+//  #define NEWPANEL  //enable this if you have a click-encoder panel
   #define SDSUPPORT
   #define ULTRA_LCD
   #define LCD_WIDTH 20
   #define LCD_HEIGHT 4
 
 // Preheat Constants
-  #define PLA_PREHEAT_HOTEND_TEMP 180 
-  #define PLA_PREHEAT_HPB_TEMP 70
-  #define PLA_PREHEAT_FAN_SPEED 255		// Insert Value between 0 and 255
+  #define PLA_PREHEAT_HOTEND_TEMP 185 
+  #define PLA_PREHEAT_HPB_TEMP 60
+  #define PLA_PREHEAT_FAN_SPEED 255  	// Insert Value between 0 and 255
 
   #define ABS_PREHEAT_HOTEND_TEMP 240
-  #define ABS_PREHEAT_HPB_TEMP 100
+  #define ABS_PREHEAT_HPB_TEMP 110
   #define ABS_PREHEAT_FAN_SPEED 255		// Insert Value between 0 and 255
 
 #else //no panel but just lcd 
