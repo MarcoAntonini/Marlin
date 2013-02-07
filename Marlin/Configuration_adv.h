@@ -24,6 +24,7 @@
 //it will turn on when any driver is enabled
 //and turn off after the set amount of seconds from last driver being disabled again
 //#define CONTROLLERFAN_PIN 23 //Pin used for the fan to cool controller, comment out to disable this function
+#define CONTROLLERFAN_PIN 9 //Ventilador Carro x
 #define CONTROLLERFAN_SEC 60 //How many seconds, after all motors were disabled, the fan should run
 
 //===========================================================================
@@ -47,13 +48,13 @@
 //#define Z_LATE_ENABLE // Enable Z the last moment. Needed if your Z driver overheats.
 
 //homing hits the endstop, then retracts by this distance, before it tries to slowly bump again:
-#define X_HOME_RETRACT_MM 4 
-#define Y_HOME_RETRACT_MM 4 
-#define Z_HOME_RETRACT_MM 2 
+#define X_HOME_RETRACT_MM 5 
+#define Y_HOME_RETRACT_MM 5 
+#define Z_HOME_RETRACT_MM 1 
 
 #define AXIS_RELATIVE_MODES {false, false, false, false}
 
-#define MAX_STEP_FREQUENCY 50000 // Max step frequency for Ultimaker (5000 pps / half step)
+#define MAX_STEP_FREQUENCY 40000 // Max step frequency for Ultimaker (5000 pps / half step)
 
 //default stepper release if idle
 #define DEFAULT_STEPPER_DEACTIVE_TIME 60
@@ -90,15 +91,15 @@
 //
 // advance (steps) = STEPS_PER_CUBIC_MM_E * EXTUDER_ADVANCE_K * cubic mm per second ^ 2
 //
-// hooke's law says:		force = k * distance
+// hooke's law says:  	force = k * distance
 // bernoulli's priniciple says:	v ^ 2 / 2 + g . h + pressure / density = constant
 // so: v ^ 2 is proportional to number of steps we advance the extruder
 //#define ADVANCE
 
 #ifdef ADVANCE
-  #define EXTRUDER_ADVANCE_K 0.015
+  #define EXTRUDER_ADVANCE_K .0
 
-  #define D_FILAMENT 1.75
+  #define D_FILAMENT 2.85
   #define STEPS_MM_E 836
   #define EXTRUTION_AREA (0.25 * D_FILAMENT * D_FILAMENT * 3.14159)
   #define STEPS_PER_CUBIC_MM_E (axis_steps_per_unit[E_AXIS]/ EXTRUTION_AREA)
